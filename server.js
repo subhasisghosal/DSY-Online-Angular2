@@ -7,7 +7,7 @@ const logger = require('./lib/logger');
 const db = require('./lib/db');
 
 var app = express()
-var PORT = 3000
+var PORT = process.env.PORT || 3300
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
