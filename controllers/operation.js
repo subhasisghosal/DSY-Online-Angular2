@@ -71,8 +71,8 @@ module.exports = {
                 res.send("Invalid");
             }
             const { err: error1, data: new_user } = await Handler(userModel.create(userInfo));
-            console.log(error1, new_user);
-            if (error1 || !new_user) return res.status(500).json({ error1, msg: "Srvr Err" });
+            if (error1 || !new_user)
+                return res.status(500).json({ error1, msg: "Srvr Err" });
             return res.send("submitted");
         } catch (error) {
             return res.status(500).json({ error, msg: "Server Err" });
