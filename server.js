@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
 
 const logger = require('./lib/logger');
 const db = require('./lib/db');
@@ -9,6 +10,7 @@ const db = require('./lib/db');
 var app = express()
 var PORT = process.env.PORT || 3300
 
+app.use(cors());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true
