@@ -5,27 +5,13 @@ const Trainee = require('../models/Trainee');
 module.exports = {
     async getAllUsers(req, res) {
         let userType = req.params.type;
-        // let userModel = userType === 'trainee' ? Trainee : userType === 'member' ? Member : userType;
         let userModel = userType === 'trainee' ? Trainee : Member;
-        let filterQuery = userType === 'all' ? {} : { 'type': userType };
+        let filterQuery = userType === 'all' ? {} : { 'user_type': userType };
         try {
             const { err: errorUser, data: userList } = await Handler(userModel.find(filterQuery));
             if (errorUser || !userList)
                 return res.status(500).json({ errorUser, msg: "Database Error" });
             return res.send(userList);
-            // if (userModel === 'all') {
-            //     const { err: errorList, data: [traineeList, memberList] } = await Handler(Promise.all([Trainee.find({}), Member.find({})]));
-            //     if (errorList || !traineeList || !memberList)
-            //         return res.status(500).json({ errorList, msg: "Database Error" });
-            //     return res.send([...traineeList, ...memberList]);
-            // } else {
-            //     console.log("Inside Else")
-            // const { err: errorUser, data: userList } = await Handler(userModel.find({ 'type': userType }));
-            // if (errorUser || !userList)
-            //     return res.status(500).json({ errorUser, msg: "Database Error" });
-            // // const userList = await userModel.create(userInfo)
-            // return res.send(userList);
-            // }
         } catch (error) {
             return res.status(500).json({ error, msg: "Server Error" });
         }
